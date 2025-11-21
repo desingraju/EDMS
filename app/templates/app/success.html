@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<style>
+body{
+font-family:Arial,sans-serif;
+padding:40px;
+text-align:center;
+background-color:#f4f6f8;
+}
+.success-box{
+background-color:#d4edda;
+color:#155724;
+border:1px solid #c3e6cb;
+padding:30px;
+border-radius:10px;
+}
+.btn{
+margin-top:20px;
+padding:10px 20px;
+background-color:#28a745;
+color:white;
+border-radius:6px;
+}
+</style>
+</head>
+<body>
+<div class="container mt-3 success-box">
+<h2>Employee added Successfully</h2>
+<p>Your data is saved</p>
+<a href="{% url "add_employee" %}" class="btn btn-primary">Add Another Employee</a>
+<a href="{% url "home" %}" class="btn btn-primary">Back To Home</a>
+</div>
+</body>
+</html>
