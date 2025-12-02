@@ -24,12 +24,30 @@ def add_employee(request):
 def success_view(request):
         return render(request,'app/success.html')
 def register(request):
-    if request.method=='POST':
-        form=UserCreationForm(request.POST)
-        if form.is_valid():
-           form.save()
-           messages.success(request, "Account created successfully. You can now log in.")
-           return redirect('login')   
-    else:  
-        form=UserCreationForm()
-    return render(request,'app/register.html',{'form':form})
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(
+                    request,
+                    "Account created successfully. You can now log in."
+                )
+                return redirect('login')
+            else:
+                messages.error(
+                    request,
+                    "Registration failed. Please correct the errors below."
+                )
+
+        except Exception as e:
+            print("Registration error:", e)
+            messages.error(
+                request,
+                "Something went wrong. Please try again later."
+            )
+    else:
+        form = UserCreationForm()
+    return render(request, 'app/register.html', {'form': form})
+
