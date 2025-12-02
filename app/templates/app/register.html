@@ -1,16 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
 </head>
 <body>
-    <h2>Register</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit">SignUP</button>
-    </form>
+
+
+{% if messages %}
+    {% for message in messages %}
+        <p style="color:{% if message.tags == 'success' %}green{% else %}red{% endif %};
+                  font-weight:bold;">
+            {{ message }}
+        </p>
+    {% endfor %}
+{% endif %}
+
+<h2>Create Your Account</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+   
+    {% for field in form %}
+        <div style="margin-bottom: 10px;">
+            <label>{{ field.label }}</label><br>
+            {{ field }}
+
+            {% for error in field.errors %}
+                <p style="color:red; font-size:14px;">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+   
+    {% for error in form.non_field_errors %}
+        <p style="color:red; font-size:14px;">{{ error }}</p>
+    {% endfor %}
+
+    <button type="submit">Register</button>
+</form>
+
 </body>
 </html>
