@@ -1,3 +1,4 @@
+
 from django.shortcuts import redirect, render
 from app.forms import EmployeeFrom
 from app.models import Employee
@@ -18,7 +19,7 @@ def add_employee(request):
        if form.is_valid():
            form.save()
            return redirect('employee_success')
-    else:    
+    else:
       form=EmployeeFrom()
     return render(request,'app/add_employee.html',{'form':form})
 def success_view(request):
@@ -29,17 +30,12 @@ def register(request):
 
         try:
             if form.is_valid():
-                form.save()
-                messages.success(
-                    request,
-                    "Account created successfully. You can now log in."
-                )
-                return redirect('login')
+               form.save()
+               messages.success(request, "Account created successfully!")
+               return redirect('login')
             else:
-                messages.error(
-                    request,
-                    "Registration failed. Please correct the errors below."
-                )
+               messages.error(request, "Registration failed. Please check your details and try again.")
+
 
         except Exception as e:
             print("Registration error:", e)
@@ -50,4 +46,3 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'app/register.html', {'form': form})
-
