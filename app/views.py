@@ -38,7 +38,7 @@ def success_view(request):
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        if form.is_valid():                      # ✅ correct usage
+        if form.is_valid():                    
             form.save()
             messages.success(
                 request,
