@@ -34,23 +34,33 @@ def success_view(request):
     return render(request, 'app/success.html')
 
 
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
 
-        if form.is_valid():
-            form.save()
-            messages.success(
-                request,
-                "Account created successfully. You can now log in."
-            )
-            return redirect('login')
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(
+                    request,
+                    "Account created successfully. You can now log in."
+                )
+                return redirect('login')
 
-        else:
-        
+            else:
+              
+                messages.error(
+                    request,
+                    "Registration failed. Please fix the errors below."
+                )
+
+        except Exception as e:
+           
+            print("Registration error:", e)
             messages.error(
                 request,
-                "Registration failed. Please correct the errors below."
+                "Something went wrong. Please try again later."
             )
 
     else:
