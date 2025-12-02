@@ -14,7 +14,6 @@ def home(request):
 
 
 def detail(request, id):
-    # safer than Employee.objects.get(id=id)
     employee = get_object_or_404(Employee, id=id)
     return render(request, 'app/employee_detail.html', {'employee': employee})
 
@@ -38,13 +37,22 @@ def success_view(request):
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        if form.is_valid():                    
+
+        if form.is_valid():
             form.save()
             messages.success(
                 request,
                 "Account created successfully. You can now log in."
             )
             return redirect('login')
+
+        else:
+        
+            messages.error(
+                request,
+                "Registration failed. Please correct the errors below."
+            )
+
     else:
         form = UserCreationForm()
 
